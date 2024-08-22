@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "CreateProduct";
+}
+@model ProductDTOUpdate
+<div class="text-center">
+    <div class="display-6"></div>
+</div>
+
+<form method="post" asp-action="UpdateProduct" enctype="multipart/form-data">
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <input type="hidden" asp-for="ProductId" />
+
+    <div class="form-group my-3">
+        <label asp-for="CategoryId"></label>
+        <select class="form-control" asp-items="@ViewBag.Categories" asp-for="CategoryId"> </select>
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control"/>
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control"/>
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Summary"></label>
+        <input asp-for="Summary" class="form-control" placeholder="Summary" />
+    </div>
+    <div class="form-group" my-3>
+        <img class="rounded shadow" width="200" alt="@Model.Name" src="@Url.Content("~/" + @Model.ImageURL)" />
+    </div>
+    <div class="form-group my-3">
+        <input name="file" type="file" class="form-control" placeholder="Select Path" accept="image/*" />
+    </div>
+
+    <div class="form-group my-3">
+        <div>
+            <button class="btn btn-primary" type="submit">
+                <i class="fa fa-save"></i> Update
+            </button>
+            <a asp-action="Index" class="btn btn-outline-primary">
+                <i class="fa fa-list"> </i>
+                Products
+            </a>
+        </div>
+    </div>
+</form>

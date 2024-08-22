@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@model List<Product>
+
+<h1>Products</h1>
+<br/>
+
+<div class="row">
+    <div class="col-md-2">
+        @await Component.InvokeAsync("CategoriesMenu")
+
+    </div>
+    <div class="col-md-10">  
+        <div class="row my-3 ">
+            @foreach (Product product in Model)
+            {
+                <partial name="ProductCard" model="@product" />
+            }
+        </div>
+    </div>
+</div>

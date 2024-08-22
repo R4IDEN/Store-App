@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Default";
+}
+
+@model IEnumerable<Category>
+
+
+<div class="my-4">
+    <ul class="list-group">
+        @foreach(var category in Model)
+        {
+            <li class="list-group-item"> @category.Name </li>
+        }
+    </ul>
+</div>
+

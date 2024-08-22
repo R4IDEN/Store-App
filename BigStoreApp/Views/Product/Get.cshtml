@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Get";
+}
+@model Product
+
+<h1 class="text-center">Product Details</h1>
+<br/>
+
+<div class="col-md-9">
+    <div class="row">
+        <!-- Ürün Görseli -->
+        <div class="">
+            <img src="@Url.Content("~/" + @Model.ImageUrl)" class="img-fluid rounded shadow" alt="Product Name">
+        </div>
+
+        <!-- Ürün Detayları -->
+        <div class="">
+            <h1 class="display-4">@Model.Name</h1>
+            <p class="lead">@Model.Summary</p>
+
+            <!-- Fiyat -->
+            <h2 class="text-success">@Model.Price</h2>
+
+            <!-- Satın Alma Butonu -->
+            <button class="btn btn-primary btn-lg mt-4">Add to Cart</button>
+        </div>
+    </div>
+</div>
