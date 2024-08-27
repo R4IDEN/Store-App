@@ -1,0 +1,51 @@
+﻿@page "/cart"  
+@model CartModel
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model._Cart.Lines.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>SubTotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model._Cart.Lines)
+            {
+                <tr>
+                    <td>@line.Product.Name</td>
+                    <td>@line.Quantity</td>
+                    <td>@line.Product.Price.ToString("c")</td>
+                    <td>@((line.Quantity * line.Product.Price).ToString("c2"))</td>
+                    <td>
+                        <form asp-page-handler="Remove" method="post">
+                            <input type="hidden" name="id" value="@line.Product.ProductId" />
+                            <input type="hidden" name="returnURL" value="@Model.ReturnURL" />
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i> Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="3"></td>
+                <td><strong>Total:</strong></td>
+                <td>@Model._Cart.ComputeTotalValue().ToString("c")</td>
+            </tr>
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}
+

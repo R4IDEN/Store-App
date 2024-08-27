@@ -11,8 +11,20 @@
             <h5 class="card-title">@Model.Name</h5>
             <p class="card-text">@Model.Price</p>
             <p class="card-text">@Model.Summary</p>
-            <a asp-action="Get" asp-route-id="@Model.ProductId" class="btn btn-primary">Go to Details</a>
+            
+            <div class="btn btn-group" style="display: flex; gap: 5px;">
+                
+                <a asp-action="Get" asp-route-id="@Model.ProductId" class="btn btn-primary btn-sm"> <i class="fa fa-right-arrow"></i>
+                    Details</a>
+
+                <form id="@Model.ProductId" asp-page="/cart" method="post">
+                    <input type="hidden" asp-for="ProductId"/>
+                    <input type="hidden" name="returnURL" value="/Product/Get/@Model.ProductId" />
+                    <button type="submit" class="btn btn-outline-primary">
+                        <i class="fa fa-cart-plus"></i>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
