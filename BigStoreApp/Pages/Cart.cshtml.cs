@@ -1,3 +1,4 @@
+using BigStoreApp.Infrastructure.Extensions;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,10 +11,10 @@ namespace BigStoreApp.Pages
         private readonly IServiceManager _services;
         public Cart _Cart { get; set; } //IOC
         
-        public CartModel(IServiceManager services, Cart cart)
+        public CartModel(IServiceManager services, Cart _cartService)
         {
             _services = services;
-            _Cart = cart;
+            _Cart = _cartService;
         }
 
         public string ReturnURL { get; set; } = "/";
@@ -30,7 +31,7 @@ namespace BigStoreApp.Pages
 
             if (product is not null)
                 _Cart.AddItem(product, 1);
-            return Page();
+            return RedirectToPage(new { returnURL = returnURL});
         }
         public IActionResult OnPostRemove(int id, String returnURL)
         {

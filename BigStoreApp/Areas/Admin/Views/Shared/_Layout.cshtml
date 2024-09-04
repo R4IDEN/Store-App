@@ -23,17 +23,22 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Home</a>
+                            <a class="nav-link text-white" area-current="page" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Product" asp-action="Index">Products</a>
+                            <a class="nav-link text-white" area-current="page" asp-area="Admin" asp-controller="Product" asp-action="Index">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Category" asp-action="Index">Categories</a>
+                            <a class="nav-link text-white" area-current="page" asp-area="Admin" asp-controller="Category" asp-action="Index">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" area-current="page" asp-area="Admin" asp-controller="Order" asp-action="Index">ORDERS</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav text-white">
-                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">WEB</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">WEB</a>
+                        </li>
                     </ul>
                 </div>
             </div>

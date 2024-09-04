@@ -39,7 +39,10 @@
                     </ul>
                     <ul class="navbar-nav text-dark">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Cart" >CART</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Cart" >
+                                <i class="fa-solid fa-cart-shopping"></i> CART
+                                (@await Component.InvokeAsync("CartSummary"))
+                            </a>
                         </li>
                         <li>
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">ADMIN</a>

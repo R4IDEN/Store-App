@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using Microsoft.AspNetCore.Builder;
 using Entities.Models;
+using BigStoreApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,15 +26,26 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     });
 });
 
+//Bu ikisi session'lar icin
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "StoreApp.Session";
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+});
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddSingleton<Cart>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
+builder.Services.AddScoped<Cart>(c => SessionCart.GetCart(c));
 builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
@@ -49,6 +61,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 

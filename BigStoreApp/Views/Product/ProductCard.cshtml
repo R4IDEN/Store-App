@@ -1,4 +1,5 @@
 ﻿
+
 @{
     ViewData["Title"] = "ProductCard";
 }
@@ -19,7 +20,7 @@
 
                 <form id="@Model.ProductId" asp-page="/cart" method="post">
                     <input type="hidden" asp-for="ProductId"/>
-                    <input type="hidden" name="returnURL" value="/Product/Get/@Model.ProductId" />
+                    <input type="hidden" name="returnURL" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                     <button type="submit" class="btn btn-outline-primary">
                         <i class="fa fa-cart-plus"></i>
                     </button>

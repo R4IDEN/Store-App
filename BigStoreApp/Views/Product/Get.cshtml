@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Get";
 }
 @model Product
@@ -23,7 +22,13 @@
             <h2 class="text-success">@Model.Price</h2>
 
             <!-- Satın Alma Butonu -->
-            <button class="btn btn-primary btn-lg mt-4">Add to Cart</button>
+            <form id="@Model.ProductId" asp-page="/cart" method="post">
+                <input type="hidden" asp-for="ProductId"/>
+                <input type="hidden" name="returnURL" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+
+                <button type="submit" class="btn btn-outline-primary btn-lg mt-4">
+                    <i class="fa fa-cart-plus"> </i> Add to Cart</button>
+            </form>
         </div>
     </div>
 </div>
