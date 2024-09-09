@@ -18,5 +18,6 @@ namespace Entities.Models
         public string? ImageUrl { get; set; }
         public int CategoryId { get; set; } //Foreign Key
         public Category? Category { get; set; } //Navigation Property
+        public bool Showcase { get; set; }
     }
 }

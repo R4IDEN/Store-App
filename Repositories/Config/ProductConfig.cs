@@ -36,7 +36,8 @@ namespace Repositories.Config
                     Name = "Ruj",
                     Price = 15_40,
                     ImageUrl = "ruj.jpg",
-                    CategoryId = 1
+                    CategoryId = 1,
+                    Showcase = true
                 },
                 new Product()
                 {
@@ -44,7 +45,8 @@ namespace Repositories.Config
                     Name = "Monitor",
                     Price = 2132_99,
                     ImageUrl = "monitor.jpg",
-                    CategoryId = 2
+                    CategoryId = 2,
+                    Showcase = true
                 });
         }
     }
