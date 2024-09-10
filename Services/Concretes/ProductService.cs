@@ -21,6 +21,10 @@ namespace Services.Concretes
         {
             return _repositoryManager.Product.GetAllProducts(trackChanges);
         }
+        public IEnumerable<Product> GetShowcaseProducts(bool trackChanges)
+        {
+            return _repositoryManager.Product.GetShowcaseProducts(trackChanges);
+        }
         public Product? GetProductWithId(int id, bool trackChanges)
         {
             var product = _repositoryManager.Product.GetProductById(id, trackChanges);

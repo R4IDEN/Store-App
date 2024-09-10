@@ -16,9 +16,15 @@ namespace Repositories.Concretes
         {
             return FindByCondition(p => p.ProductId.Equals(id), trackChanges);
         }
+        public IQueryable<Product> GetShowcaseProducts(bool trackChanges)
+        {
+            return FindAll(trackChanges).Where(p => p.Showcase.Equals(true));
+        }
 
         public void CreateProduct(Product product) => Create(product);
         public void UpdateProduct(Product product) => Update(product);
         public void DeleteProduct(Product product) => Delete(product);
+
+        
     }
 }

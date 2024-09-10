@@ -7,15 +7,23 @@
 
 <div class="col-sm-12 col-md-4 col-lg-3 my-3 d-flex align-items-stretch">
     <div class="card" style="width: 18rem;">
+        
+        <div class="card-header text-center">
+            @Model.Name
+        </div>
+
         <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.Name">
         <div class="card-body">
-            <h5 class="card-title">@Model.Name</h5>
-            <p class="card-text">@Model.Price</p>
+            <div class="card-text">
+                <div class="text-danger text-center lead p-2 rounded-2">
+                    @Model.Price.ToString("C2")
+                </div>
+            </div>
             <p class="card-text">@Model.Summary</p>
-            
-            <div class="btn btn-group" style="display: flex; gap: 5px;">
+
+            <div class="btn btn-group d-flex justify-content-center" style="display: flex; gap: 5px;">
                 
-                <a asp-action="Get" asp-route-id="@Model.ProductId" class="btn btn-primary btn-sm"> <i class="fa fa-right-arrow"></i>
+                <a asp-controller="Product" asp-action="Get" asp-route-id="@Model.ProductId" class="btn btn-primary btn-sm"> <i class="fa fa-right-arrow"></i>
                     Details</a>
 
                 <form id="@Model.ProductId" asp-page="/cart" method="post">

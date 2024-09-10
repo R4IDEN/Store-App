@@ -7,6 +7,8 @@ namespace Repositories.Contracts
     {
         //Task<List<Product>> GetAllProducts();
         IQueryable<Product> GetAllProducts(bool trackChanges);
+        IQueryable<Product> GetShowcaseProducts(bool trackChanges);
+
         Product GetProductById(int id, bool trackChanges);
         void CreateProduct(Product product);
         void UpdateProduct(Product product);

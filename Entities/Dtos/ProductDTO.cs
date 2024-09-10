@@ -13,6 +13,7 @@ namespace Entities.Dtos
         public decimal Price { get; set; }
         public string? ImageURL { get; set; }
         public string? Summary { get; set; }
+        public bool Showcase { get; set; }
         public int? CategoryId { get; set; }
     }
 }

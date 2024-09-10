@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Default";
+}
+
+@model IEnumerable<Product>
+
+<div class="text-center">
+    <h6 class="display-6">SHOWCASE</h6>
+</div>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <partial name="ProductCard" model="item" />
+    }
+</div>
+
