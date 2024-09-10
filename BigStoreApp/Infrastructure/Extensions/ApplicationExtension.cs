@@ -17,5 +17,13 @@ namespace BigStoreApp.Infrastructure.Extensions
                 _context.Database.Migrate();
 
         }
+
+        public static void ConfigureLocalization(this IApplicationBuilder app) 
+        {
+            app.UseRequestLocalization(options =>
+            options.AddSupportedCultures("tr-TR", "en-US").
+            SetDefaultCulture("tr-TR")
+            );
+        }
     }
 }

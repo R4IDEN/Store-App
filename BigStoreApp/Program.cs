@@ -11,6 +11,7 @@ builder.Services.ConfigureDbContext(builder.Configuration);
 builder.Services.ConfigureSession();
 builder.Services.ConfigureRepositoryRegistration();
 builder.Services.ConfigureServiceRegistration();
+builder.Services.ConfigureRouting();
 
 var app = builder.Build();
 
@@ -47,4 +48,5 @@ app.UseEndpoints(endpoints =>
 });
 
 app.ConfigureAndCheckMigration(); //extension for auto migrate
+app.ConfigureLocalization();
 app.Run();
