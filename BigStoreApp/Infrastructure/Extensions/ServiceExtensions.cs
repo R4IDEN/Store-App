@@ -57,6 +57,7 @@ namespace BigStoreApp.Infrastructure.Extensions
             services.AddRouting(options =>
             {
                 options.LowercaseUrls = true;
+                options.AppendTrailingSlash = true;
             });
         }
     }
