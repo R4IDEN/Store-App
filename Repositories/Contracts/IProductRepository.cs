@@ -1,5 +1,6 @@
 ﻿using Entities.Dtos;
 using Entities.Models;
+using Entities.RequestParameters;
 
 namespace Repositories.Contracts
 {
@@ -7,6 +8,7 @@ namespace Repositories.Contracts
     {
         //Task<List<Product>> GetAllProducts();
         IQueryable<Product> GetAllProducts(bool trackChanges);
+        IQueryable<Product> GetAllProductsWithDetails(ProductRequestParameters p);
         IQueryable<Product> GetShowcaseProducts(bool trackChanges);
 
         Product GetProductById(int id, bool trackChanges);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entities.RequestParameters;
+using Microsoft.AspNetCore.Mvc;
 using Repositories.Contracts;
 using Services.Contracts;
 
@@ -13,9 +14,9 @@ namespace BigStoreApp.Controllers
             _serviceManager = serviceManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(ProductRequestParameters p)
         {
-            var products = _serviceManager.ProductService.GetAllProducts(false).ToList();
+            var products = _serviceManager.ProductService.GetAllProductsWithDetails(p).ToList();
             return View(products);
         }
 

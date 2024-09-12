@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Default";
+}
+
+    <div class="my-3">
+        <h6 class="lead">
+            <i class="fa fa-filter text-secondary"> Filters </i>
+        </h6>
+
+        <div class="my-2">
+            <form method="get" asp-action="Index">
+                <input type="hidden" name="categoryId" value="@Context.Request.Query["categoryId"]"/>
+                <div class="form-group my-2">
+                <input class="form-control" name="SearchTerm" placeholder="Search" />
+                </div>
+                <div class="form-group my-2">
+                    <input class="form-control" name="minPrice" placeholder="Min. Price" />
+                </div>
+                <div class="form-group my-2">
+                    <input class="form-control" name="maxPrice" placeholder="Max. Price" />
+                </div>
+
+                <div class="form-group my-2">
+                    <button type="submit" class="btn btn-sm btn-primary"> Filter </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+

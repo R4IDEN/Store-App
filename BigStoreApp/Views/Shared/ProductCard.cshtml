@@ -12,7 +12,7 @@
             @Model.Name
         </div>
 
-        <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.Name">
+        <img src="@Url.Content("~/" + @Model.ImageUrl)" class="card-img-top" alt="@Model.Name">
         <div class="card-body">
             <div class="card-text">
                 <div class="text-danger text-center lead p-2 rounded-2">

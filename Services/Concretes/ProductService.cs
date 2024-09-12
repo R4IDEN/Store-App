@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entities.Dtos;
 using Entities.Models;
+using Entities.RequestParameters;
 using Repositories.Contracts;
 using Services.Contracts;
 using System.Net.Http.Headers;
@@ -20,6 +21,10 @@ namespace Services.Concretes
         public IEnumerable<Product> GetAllProducts(bool trackChanges)
         {
             return _repositoryManager.Product.GetAllProducts(trackChanges);
+        }
+        public IEnumerable<Product> GetAllProductsWithDetails(ProductRequestParameters p)
+        {
+            return _repositoryManager.Product.GetAllProductsWithDetails(p);
         }
         public IEnumerable<Product> GetShowcaseProducts(bool trackChanges)
         {
@@ -63,5 +68,7 @@ namespace Services.Concretes
             }
             return false;
         }
+
+        
     }
 }
