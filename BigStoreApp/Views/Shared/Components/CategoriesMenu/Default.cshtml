@@ -11,7 +11,7 @@
         @foreach(var category in Model)
         {
             <li class="list-group-item">
-                <a asp asp-action="Index" asp-route-categoryId = "@category.CategoryId"> @category.Name </a>
+                <a asp asp-action="Index" asp-route-categoryId="@category.CategoryId" style="text-decoration: none; color: inherit;"> @category.Name </a>
             </li>
         }
     </ul>

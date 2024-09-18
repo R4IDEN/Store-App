@@ -18,31 +18,7 @@ namespace Services.Concretes
             _repositoryManager = repositoryManager;
             _mapper = mapper;
         }
-        public IEnumerable<Product> GetAllProducts(bool trackChanges)
-        {
-            return _repositoryManager.Product.GetAllProducts(trackChanges);
-        }
-        public IEnumerable<Product> GetAllProductsWithDetails(ProductRequestParameters p)
-        {
-            return _repositoryManager.Product.GetAllProductsWithDetails(p);
-        }
-        public IEnumerable<Product> GetShowcaseProducts(bool trackChanges)
-        {
-            return _repositoryManager.Product.GetShowcaseProducts(trackChanges);
-        }
-        public Product? GetProductWithId(int id, bool trackChanges)
-        {
-            var product = _repositoryManager.Product.GetProductById(id, trackChanges);
-            return product == null ? throw new Exception("Product not found") : product;
-        }
-
-        public ProductDTOUpdate? GetProductWithIdForUpdate(int id, bool trackChanges)
-        {
-            var product = _repositoryManager.Product.GetProductById(id, trackChanges);
-            var productDTO = _mapper.Map<ProductDTOUpdate>(product);
-            return product == null ? throw new Exception("Product not found") : productDTO;
-        }
-
+        
         public void CreateProduct(ProductDTOInsertion productCreateDTO)
         {
             var product = _mapper.Map<Product>(productCreateDTO);
@@ -69,6 +45,36 @@ namespace Services.Concretes
             return false;
         }
 
-        
+        public IEnumerable<Product> GetAllProducts(bool trackChanges)
+        {
+            return _repositoryManager.Product.GetAllProducts(trackChanges);
+        }
+        public IEnumerable<Product> GetAllProductsWithDetails(ProductRequestParameters p)
+        {
+            return _repositoryManager.Product.GetAllProductsWithDetails(p);
+        }
+        public IEnumerable<Product> GetShowcaseProducts(bool trackChanges)
+        {
+            return _repositoryManager.Product.GetShowcaseProducts(trackChanges);
+        }
+        public Product? GetProductWithId(int id, bool trackChanges)
+        {
+            var product = _repositoryManager.Product.GetProductById(id, trackChanges);
+            return product == null ? throw new Exception("Product not found") : product;
+        }
+        public ProductDTOUpdate? GetProductWithIdForUpdate(int id, bool trackChanges)
+        {
+            var product = _repositoryManager.Product.GetProductById(id, trackChanges);
+            var productDTO = _mapper.Map<ProductDTOUpdate>(product);
+            return product == null ? throw new Exception("Product not found") : productDTO;
+        }
+        public IEnumerable<Product> GetLatestProducts(int n, bool trackChanges)
+        {
+            return _repositoryManager
+                .Product
+                .FindAll(trackChanges)
+                .OrderByDescending(prd => prd.ProductId)
+                .Take(n);
+        }
     }
 }
