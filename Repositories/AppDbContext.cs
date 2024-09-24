@@ -1,12 +1,13 @@
 ﻿using Entities.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Repositories.Config;
 using System.Reflection;
 
 namespace StoreApp.Repositories
 {
-    public class AppDbContext:DbContext
-    {
+    public class AppDbContext:IdentityDbContext<IdentityUser>
+    { 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }

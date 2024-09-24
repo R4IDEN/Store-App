@@ -1,5 +1,6 @@
 ﻿using BigStoreApp.Models;
 using Entities.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Concretes;
 using Repositories.Contracts;
@@ -18,9 +19,24 @@ namespace BigStoreApp.Infrastructure.Extensions
                 opt.UseSqlServer(configuration.GetConnectionString("SqlConnection"), options =>
                 {
                     options.MigrationsAssembly("BigStoreApp");
-                    //options.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
                 });
+
+                opt.EnableSensitiveDataLogging(true);
             });
+        }
+
+        public static void ConfigureIdentity(this IServiceCollection services)
+        {
+            services.AddIdentity<IdentityUser, IdentityRole>(opt =>
+            {
+                opt.SignIn.RequireConfirmedAccount = false;
+                opt.User.RequireUniqueEmail = true;
+                opt.Password.RequireUppercase = true;
+                opt.Password.RequireDigit = true;
+                opt.Password.RequiredLength = 10;
+                opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ ";
+            })
+            .AddEntityFrameworkStores<AppDbContext>();
         }
 
         public static void ConfigureSession(this IServiceCollection services)

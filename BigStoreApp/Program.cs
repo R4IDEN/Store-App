@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.ConfigureDbContext(builder.Configuration);
+builder.Services.ConfigureIdentity();
 builder.Services.ConfigureSession();
 builder.Services.ConfigureRepositoryRegistration();
 builder.Services.ConfigureServiceRegistration();
@@ -27,6 +28,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();
 app.UseRouting();
+
+// bu iki middleware'i routing ve endpoints arasinda olusturmak gerekiyor
+app.UseAuthentication();
 app.UseAuthorization();
 
 /*app.MapControllerRoute(
@@ -49,4 +53,5 @@ app.UseEndpoints(endpoints =>
 
 app.ConfigureAndCheckMigration(); //extension for auto migrate
 app.ConfigureLocalization();
+app.ConfigureDefaultAdminUser();
 app.Run();

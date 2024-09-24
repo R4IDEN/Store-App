@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreApp.Repositories;
 
@@ -11,9 +12,11 @@ using StoreApp.Repositories;
 namespace BigStoreApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240921210327_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,7 +83,7 @@ namespace BigStoreApp.Migrations
                         new
                         {
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 9, 21, 17, 12, 53, 543, DateTimeKind.Local).AddTicks(2124),
+                            CreatedDate = new DateTime(2024, 9, 21, 17, 3, 27, 347, DateTimeKind.Local).AddTicks(1023),
                             Name = "Cleaning Product",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             isActive = true,
@@ -89,7 +92,7 @@ namespace BigStoreApp.Migrations
                         new
                         {
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 9, 21, 17, 12, 53, 543, DateTimeKind.Local).AddTicks(2164),
+                            CreatedDate = new DateTime(2024, 9, 21, 17, 3, 27, 347, DateTimeKind.Local).AddTicks(1059),
                             Name = "Technology Products",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             isActive = true,
@@ -193,8 +196,8 @@ namespace BigStoreApp.Migrations
                         {
                             ProductId = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 9, 21, 17, 12, 53, 543, DateTimeKind.Local).AddTicks(2642),
-                            ImageUrl = "_photos/sabun.jpg",
+                            CreatedDate = new DateTime(2024, 9, 21, 17, 3, 27, 347, DateTimeKind.Local).AddTicks(1389),
+                            ImageUrl = "sabun.jpg",
                             Name = "Sabun",
                             Price = 199m,
                             Showcase = false,
@@ -206,8 +209,8 @@ namespace BigStoreApp.Migrations
                         {
                             ProductId = 2,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 9, 21, 17, 12, 53, 543, DateTimeKind.Local).AddTicks(2649),
-                            ImageUrl = "_photos/parfum.jpg",
+                            CreatedDate = new DateTime(2024, 9, 21, 17, 3, 27, 347, DateTimeKind.Local).AddTicks(1395),
+                            ImageUrl = "parfum.jpg",
                             Name = "Parfüm",
                             Price = 500055m,
                             Showcase = false,
@@ -219,8 +222,8 @@ namespace BigStoreApp.Migrations
                         {
                             ProductId = 3,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 9, 21, 17, 12, 53, 543, DateTimeKind.Local).AddTicks(2651),
-                            ImageUrl = "_photos/ruj.jpg",
+                            CreatedDate = new DateTime(2024, 9, 21, 17, 3, 27, 347, DateTimeKind.Local).AddTicks(1398),
+                            ImageUrl = "ruj.jpg",
                             Name = "Ruj",
                             Price = 1540m,
                             Showcase = true,
@@ -232,8 +235,8 @@ namespace BigStoreApp.Migrations
                         {
                             ProductId = 4,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 9, 21, 17, 12, 53, 543, DateTimeKind.Local).AddTicks(2653),
-                            ImageUrl = "_photos/monitor.jpg",
+                            CreatedDate = new DateTime(2024, 9, 21, 17, 3, 27, 347, DateTimeKind.Local).AddTicks(1400),
+                            ImageUrl = "monitor.jpg",
                             Name = "Monitor",
                             Price = 213299m,
                             Showcase = true,
@@ -268,29 +271,6 @@ namespace BigStoreApp.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "2c4df198-b14c-4358-92b6-5a791628fbad",
-                            ConcurrencyStamp = "e6693041-489c-4c8a-8cb4-5bd9f95f5906",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        },
-                        new
-                        {
-                            Id = "99fe8d9d-6b10-4ec8-88b1-d854cf982ae0",
-                            ConcurrencyStamp = "611a254e-a49e-49bf-a39a-6c7954cd0498",
-                            Name = "Editor",
-                            NormalizedName = "EDITOR"
-                        },
-                        new
-                        {
-                            Id = "e3de914c-c7ec-466b-b4dd-1fe205bf41eb",
-                            ConcurrencyStamp = "f9346af6-2e8e-49af-ad3e-55190dff0f75",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

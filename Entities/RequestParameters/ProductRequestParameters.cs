@@ -6,6 +6,18 @@ namespace Entities.RequestParameters
         public int? CategoryId { get; set; }
         public int? minPrice { get; set; } = 0;
         public int? maxPrice { get; set; } = int.MaxValue;
-        public bool IsValidPrice => maxPrice > minPrice;
+        public string bAction { get; set; }
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+
+        public ProductRequestParameters() : this(1,6)
+        {
+            
+        }
+        public ProductRequestParameters(int pageNumber, int pageSize)
+        {
+            PageNumber = pageNumber;
+            PageSize = pageSize;
+        }
     }
 }

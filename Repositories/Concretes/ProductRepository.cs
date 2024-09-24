@@ -22,7 +22,8 @@ namespace Repositories.Concretes
             return _context.Products
                 .FilteredByCategoryId(p.CategoryId)
                 .FilteredBySearchTerm(p.SearchTerm)
-                .FilteredByPrice(p.minPrice, p.maxPrice, p.IsValidPrice);
+                .FilteredByPrice(p.minPrice, p.maxPrice, p.bAction)
+                .ToPaginate(p.PageNumber,p.PageSize);
         }
         public Product GetProductById(int id, bool trackChanges)
         {

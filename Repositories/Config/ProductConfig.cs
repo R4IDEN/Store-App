@@ -19,7 +19,7 @@ namespace Repositories.Config
                     ProductId = 1,
                     Name = "Sabun",
                     Price = 199,
-                    ImageUrl = "sabun.jpg",
+                    ImageUrl = "_photos/sabun.jpg",
                     CategoryId = 1
                 },
                 new Product()
@@ -27,7 +27,7 @@ namespace Repositories.Config
                     ProductId = 2,
                     Name = "Parfüm",
                     Price = 5000_55,
-                    ImageUrl = "parfum.jpg",
+                    ImageUrl = "_photos/parfum.jpg",
                     CategoryId = 1
                 },
                 new Product()
@@ -35,7 +35,7 @@ namespace Repositories.Config
                     ProductId = 3,
                     Name = "Ruj",
                     Price = 15_40,
-                    ImageUrl = "ruj.jpg",
+                    ImageUrl = "_photos/ruj.jpg",
                     CategoryId = 1,
                     Showcase = true
                 },
@@ -44,7 +44,7 @@ namespace Repositories.Config
                     ProductId = 4,
                     Name = "Monitor",
                     Price = 2132_99,
-                    ImageUrl = "monitor.jpg",
+                    ImageUrl = "_photos/monitor.jpg",
                     CategoryId = 2,
                     Showcase = true
                 });

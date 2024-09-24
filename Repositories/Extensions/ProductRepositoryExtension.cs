@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Repositories.Extensions
 {
@@ -26,12 +27,22 @@ namespace Repositories.Extensions
                 return products.Where(prd=> prd.Name.ToLower().Contains(searchTerm.ToLower()));
         }
 
-        public static IQueryable<Product> FilteredByPrice(this IQueryable<Product> products, int? minPrice, int? maxPrice, bool IsValidPrice)
+        public static IQueryable<Product> FilteredByPrice(this IQueryable<Product> products, int? minPrice, int? maxPrice, string? bAction)
         {
-            if (IsValidPrice)
+            minPrice ??= 0;
+            maxPrice ??= int.MaxValue;
+
+            if (bAction == "filter" && maxPrice>minPrice)
                 return products.Where(prd => prd.Price >= minPrice && prd.Price <= maxPrice);
             else
                 return products;
+        }
+    
+        public static IQueryable<Product> ToPaginate(this IQueryable<Product> products, int pageNumber,int pageSize) 
+        {
+            return products
+                .Skip(((pageNumber - 1) * pageSize))
+                .Take(pageSize);
         }
     }
 }

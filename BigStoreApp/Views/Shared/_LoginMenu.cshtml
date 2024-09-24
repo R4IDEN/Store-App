@@ -1,0 +1,39 @@
+﻿@using BigStoreApp.Infrastructure.Extensions;
+
+<!--
+    Authentication Middleware: app.UseAuthentication() middleware'i calistirildiktan sonra, kullanici
+    login oldugunda, ASP.NET Core, kullanıcının kimliğini (User.Identity) olusturur ve HTTP istekleri
+    boyunca bu bilgiyi tasır.
+    User Nesnesi: User nesnesi, o anki oturumdaki kullaniciya ait bilgileri taşır. Kullanıcının oturum
+    acip acmadigini (IsAuthenticated), kullanici adini ve diger kimlik bilgilerini icerir.
+-->
+
+@if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <li>
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">ADMIN</a>
+    </li>
+}
+
+@if(User.Identity.IsAuthenticated)
+{
+    <li>
+        <a  class="nav-link text-dark"
+            aria-current="page"
+            asp-area=""
+            asp-controller="Account"
+            asp-route-returnUrl ="@Context.Request.PathAndQuery()"
+            asp-action="Logout"> Logout</a>
+    </li>
+}
+else
+{
+    <li>
+        <a class="nav-link text-dark"
+           aria-current="page"
+           asp-area=""
+           asp-controller="Account"
+           asp-route-returnUrl="@Context.Request.PathAndQuery()"
+           asp-action="Login"> Login</a>
+    </li>
+}
