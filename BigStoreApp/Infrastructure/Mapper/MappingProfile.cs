@@ -12,7 +12,7 @@ namespace BigStoreApp.Infrastructure.Mapper
             CreateMap<Product, ProductDTOInsertion>().ReverseMap();
             CreateMap<Product, ProductDTOUpdate>().ReverseMap();
             CreateMap<IdentityUser, UserDTOForInsertion>().ReverseMap();
-
+            CreateMap<UserDTOForUpdate, IdentityUser>().ReverseMap();
         }
     }
 }

@@ -1,10 +1,10 @@
-﻿@model UserDTOForInsertion
+﻿@model UserDTOForUpdate
 
 <div class="text-center my-5">
-    <div class="display-6"> CREATE USER </div>
+    <div class="display-6"> UPDATE, for user: @Model.UserName </div>
 </div>
 
-<form method="post" asp-action="Create">
+<form method="post" asp-action="Update">
     <div class="row">
         <div class="col-md-6">
             <div class="lead p-2 mt-2">
@@ -18,10 +18,6 @@
             <div class="form-group my-1">
                 <label asp-for="Email"></label>
                 <input asp-for="Email" class="form-control" placeholder="Please enter email" />
-            </div>
-            <div class="form-group my-1">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control" placeholder="******" />
             </div>
             <div class="form-group my-1">
                 <label asp-for="PhoneNumber"></label>
@@ -49,10 +45,11 @@
                 @foreach (var item in Model.Roles)
                 {
                     <div class="form-check my-2">
-                        <input type="checkbox" 
-                               name="Roles" 
-                               value="@item" 
-                               class="form-check-input" />
+                        <input  type="checkbox" 
+                                name="Roles" 
+                                value="@item"
+                                checked="@(Model.UserRoles.Contains(@item))"
+                                class="form-check-input" />
                         <label class="form-check-label">@item</label>
                     </div>
                 }

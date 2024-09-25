@@ -28,7 +28,7 @@ namespace Services.Concretes
             var user = _mapper.Map<IdentityUser>(userDTO);
             var result = await _userManager.CreateAsync(user, userDTO.Password);
 
-            if(!result.Succeeded) 
+            if(!result.Succeeded)
                 throw new Exception("Something went wrong during Add User operation.");
             
             if(userDTO.Roles.Count > 0) 
@@ -39,6 +39,47 @@ namespace Services.Concretes
             }
 
             return result;
+        }
+
+        public async Task<IdentityUser> SelectUser(string userName)
+        {
+            return await _userManager.FindByNameAsync(userName);
+        }
+
+        public async Task<UserDTOForUpdate> SelectUserForUpdate(string userName)
+        {
+            var user = await SelectUser(userName);
+            if (user is null)
+                throw new Exception("User not found for update process");
+
+            var userDTO = _mapper.Map<UserDTOForUpdate>(user);
+
+            userDTO.Roles = new HashSet<string>(Roles.Select(r=>r.Name).ToList());
+            userDTO.UserRoles = new HashSet<string> (await _userManager.GetRolesAsync(user));
+            return userDTO;
+        }
+
+        public async Task Update(UserDTOForUpdate userDTO)
+        {
+            var user = await SelectUser(userDTO.UserName);
+
+            if(user is null)
+            {
+                throw new Exception("User not found");
+            }
+
+            user.PhoneNumber = userDTO.PhoneNumber;
+            user.Email = userDTO.Email;
+            var updateResult = await _userManager.UpdateAsync(user);
+
+            if(userDTO.Roles.Any())
+            {
+                var userRoles = await _userManager.GetRolesAsync(user);
+
+                await _userManager.RemoveFromRolesAsync(user, userRoles);
+                await _userManager.AddToRolesAsync(user, userDTO.Roles);
+            }
+            return;
         }
     }
 }

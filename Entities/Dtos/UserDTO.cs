@@ -9,7 +9,6 @@ namespace Entities.Dtos
 {
     public class UserDTO
     {
-        [DataType(DataType.Text)]
         [Required(ErrorMessage ="Username is mandatory.")]
         public string? UserName { get; init; }
 

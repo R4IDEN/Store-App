@@ -15,15 +15,15 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(IdentityUser user in Model)
+        @foreach (IdentityUser item in Model)
         {
             <tr>
-                <td>@user.Id</td>
-                <td>@user.UserName</td>
+                <td>@item.Id</td>
+                <td>@item.UserName</td>
                 <td>-</td>
                 <td>
                     <div class="btn-group">
-                        <a class="btn btn-sm btn-warning" style="margin-right: 5px;"> Update </a>
+                        <a class="btn btn-sm btn-warning" asp-action="Update" asp-route-id="@item.UserName" style="margin-right: 5px;"> Edit </a>
                         <a class="btn btn-sm btn-info" style="margin-right: 5px;"> Reset Pass </a>
                         <a class="btn btn-sm btn-danger"> Delete </a>
                     </div>
