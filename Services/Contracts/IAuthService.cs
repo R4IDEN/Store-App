@@ -1,4 +1,5 @@
 ﻿
+using Entities.Dtos;
 using Microsoft.AspNetCore.Identity;
 
 namespace Services.Contracts
@@ -7,5 +8,6 @@ namespace Services.Contracts
     {
         IEnumerable<IdentityRole> Roles { get; }
         IEnumerable<IdentityUser> Users { get; }
+        Task<IdentityResult> CreateUser(UserDTOForInsertion userDTO);
     }
 }
