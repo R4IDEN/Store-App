@@ -46,7 +46,7 @@ namespace BigStoreApp.Areas.Admin.Controllers
         }
 
 
-        public async Task<IActionResult> Update([FromRoute(Name ="id")] string id)
+        public async Task<IActionResult> Update([FromRoute(Name = "id")] string id)
         {
             return View(await _services.AuthService.SelectUserForUpdate(id));
         }
@@ -55,12 +55,42 @@ namespace BigStoreApp.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update([FromForm] UserDTOForUpdate userDTO)
         {
-            if(ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 await _services.AuthService.Update(userDTO);
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+
+        public async Task<IActionResult> ResetPassword([FromRoute(Name = "id")] string id)
+        {
+            return View(new ResetPasswordDTO()
+            {
+                UserName = id
+            });
+        }
+
+        public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordDTO resetPasswordDTO)
+        {
+            IdentityResult res = await _services.AuthService.ResetPassword(resetPasswordDTO);
+            return res.Succeeded
+                ? RedirectToAction("Index")
+                : View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteUser([FromForm] UserDTO userDTO)
+        {
+            var res = await _services
+                .AuthService
+                .DeleteUser(userDTO.UserName);
+
+            return res.Succeeded
+                ? RedirectToAction("Index")
+                : View();
         }
     }
 }

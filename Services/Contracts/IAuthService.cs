@@ -12,5 +12,7 @@ namespace Services.Contracts
         Task<IdentityUser> SelectUser(string userName);
         Task<UserDTOForUpdate> SelectUserForUpdate(string userName);
         Task Update(UserDTOForUpdate userDTO);
+        Task<IdentityResult> ResetPassword(ResetPasswordDTO resetPasswordDTO);
+        Task<IdentityResult> DeleteUser(string userName);
     }
 }

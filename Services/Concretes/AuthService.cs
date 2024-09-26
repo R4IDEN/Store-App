@@ -41,14 +41,36 @@ namespace Services.Concretes
             return result;
         }
 
-        public async Task<IdentityUser> SelectUser(string userName)
+        public async Task<IdentityResult> DeleteUser(string userName)
         {
-            return await _userManager.FindByNameAsync(userName);
+            var user = await _userManager.FindByNameAsync(userName);
+            if(user is null)
+                throw new Exception("User is not found for deleting process.");
+
+            return await _userManager.DeleteAsync(user);
         }
+
+        public async Task<IdentityResult> ResetPassword(ResetPasswordDTO resetPasswordDTO)
+        {
+            var user = await _userManager.FindByNameAsync(resetPasswordDTO.UserName);
+            if (user is null)
+                throw new Exception("User is not found for Reset Password process.");
+
+            await _userManager.RemovePasswordAsync(user);
+            IdentityResult res = await _userManager.AddPasswordAsync(user, resetPasswordDTO.Password);
+            return res;
+        }
+
+        public Task<IdentityUser> SelectUser(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        #region UPDATE
 
         public async Task<UserDTOForUpdate> SelectUserForUpdate(string userName)
         {
-            var user = await SelectUser(userName);
+            var user = await _userManager.FindByNameAsync(userName);
             if (user is null)
                 throw new Exception("User not found for update process");
 
@@ -81,5 +103,6 @@ namespace Services.Concretes
             }
             return;
         }
+        #endregion
     }
 }
