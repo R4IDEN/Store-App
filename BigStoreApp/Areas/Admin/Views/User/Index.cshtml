@@ -26,7 +26,7 @@
             <tr>
                 <td>@item.Id</td>
                 <td>@item.UserName</td>
-                <td>-</td>
+                <td user-name="@item.UserName" user-role=""></td>
                 <td>
                     <div class="btn-group">
                         <a class="btn btn btn-warning" asp-action="Update" asp-route-id="@item.UserName" style="margin-right: 5px;"> Edit </a>

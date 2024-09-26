@@ -1,5 +1,6 @@
 ﻿using BigStoreApp.Models;
 using Entities.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Concretes;
@@ -75,6 +76,16 @@ namespace BigStoreApp.Infrastructure.Extensions
             {
                 options.LowercaseUrls = true;
                 options.AppendTrailingSlash = true;
+            });
+        }
+        public static void ConfigureApplicationCookie(this IServiceCollection services) 
+        {
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.LoginPath = new PathString("/Account/Login");
+                opt.AccessDeniedPath = new PathString("/Account/AccessDenied");
+                opt.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                opt.ExpireTimeSpan = TimeSpan.FromMinutes(9);
             });
         }
     }

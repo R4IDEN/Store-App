@@ -13,6 +13,7 @@ builder.Services.ConfigureSession();
 builder.Services.ConfigureRepositoryRegistration();
 builder.Services.ConfigureServiceRegistration();
 builder.Services.ConfigureRouting();
+builder.Services.ConfigureApplicationCookie();
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
 
@@ -20,6 +21,7 @@ namespace BigStoreApp.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Checkout() => View(new Order());
 
         [HttpPost]
