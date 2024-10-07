@@ -2,6 +2,50 @@
     ViewData["Title"] = "Home Page";
 }
 
-@await Component.InvokeAsync("Showcase")
+<div class="container my-5">
+    <!-- Hero Section -->
+    <div class="jumbotron text-center bg-secondary text-white" style="padding: 50px 25px;">
+        <h1 class="display-4">Welcome to your customizable shop! <br /> You ask, we do.</h1>
+        <p class="lead">Tell us your needs, and we will create a special site for you, using our infrastructure created with new technologies.</p>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-success btn-lg">Go to products section</a>
+    </div>
 
+    <hr class="my-4">
 
+    <!-- Features Section -->
+    <div class="row text-center my-5">
+        <div class="col-lg-4">
+            <div class="feature-icon bg-success text-white rounded-circle mb-3" style="padding: 20px;">
+                <i class="fa fa-truck fa-3x"></i>
+            </div>
+            <h3>Fast Delivery</h3>
+            <p class="text-muted">Fast shipping service to all over Turkey.</p>
+        </div>
+        <div class="col-lg-4">
+            <div class="feature-icon bg-success text-white rounded-circle mb-3" style="padding: 20px;">
+                <i class="fa fa-shield fa-3x"></i>
+            </div>
+            <h3>Safe Shopping</h3>
+            <p class="text-muted">Secure payment with 256-bit SSL encryption.</p>
+        </div>
+        <div class="col-lg-4">
+            <div class="feature-icon bg-success text-white rounded-circle mb-3" style="padding: 20px;">
+                <i class="fa fa-star fa-3x"></i>
+            </div>
+            <h3>High-end brands</h3>
+            <p class="text-muted">The best brands and products from around the world.</p>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Product Showcase Section -->
+    @await Component.InvokeAsync("Showcase")
+
+    <!-- Call to Action Section -->
+    <div class="text-center my-5">
+        <h2 class="display-5">Special Discounts for new members</h2>
+        <p class="lead">Catch discount opportunities</p>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-primary btn-lg">SALE</a>
+    </div>
+</div>

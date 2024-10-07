@@ -3,6 +3,9 @@ using BigStoreApp.Infrastructure.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddControllers()
+    .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
+
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(Program));
@@ -14,6 +17,7 @@ builder.Services.ConfigureRepositoryRegistration();
 builder.Services.ConfigureServiceRegistration();
 builder.Services.ConfigureRouting();
 builder.Services.ConfigureApplicationCookie();
+
 
 var app = builder.Build();
 
@@ -50,6 +54,7 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Home}/{action=Index}/{id?}");
 
     endpoints.MapRazorPages();
+    endpoints.MapControllers();
 });
 
 app.ConfigureAndCheckMigration(); //extension for auto migrate

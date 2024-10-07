@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BigStoreApp</title>
+    <title>@ViewData["Title"] - Custom Store App</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BigStoreApp.styles.css" asp-append-version="true" />
@@ -61,8 +61,8 @@
         </main>
     </div>
 
-    <footer>
-        @RenderSection("Footer",false);
+    <footer class="mt-auto">
+        @RenderSection("Footer",false)
         <partial name="_Footer"></partial>
         <!-- <div class="container">
             &copy; 2024 - BigStoreApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
