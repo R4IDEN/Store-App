@@ -44,6 +44,20 @@ namespace Services.Concretes
             }
             return false;
         }
+        public void ToggleShowcase(int id)
+        {
+            var product = GetProductWithId(id, false);
+
+            if (product is null)
+                throw new Exception("Showcase update process failed, try again.");
+
+            product.Showcase = !product.Showcase;
+
+            _repositoryManager.Product.UpdateProduct(product);
+            _repositoryManager.Save();
+            return;
+        }
+
 
         public IEnumerable<Product> GetAllProducts(bool trackChanges)
         {

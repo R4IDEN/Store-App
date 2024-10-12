@@ -1,30 +1,29 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Default";
 }
 
-    <div class="my-3">
-        <h6>
-            <i class="fa fa-filter text-black"> Filters </i>
-        </h6>
+<div class="filter-container my-3 p-3">
+    <h6 class="filter-title">
+        <i class="fa fa-filter text-black"> Filters </i>
+    </h6>
 
-        <div class="my-2">
-            <form method="get" asp-action="Index">
-                <input type="hidden" name="categoryId" value="@Context.Request.Query["categoryId"]"/>
-                <div class="form-group my-2">
-                    <input class="form-control" name="SearchTerm" placeholder="Search" />
-                </div>
-                <div class="form-group my-2">
-                    <input class="form-control" name="minPrice" placeholder="Min. Price"/>
-                </div>
-                <div class="form-group my-2">
-                    <input class="form-control" name="maxPrice" placeholder="Max. Price"/>
-                </div>
+    <div class="filter-body">
+        <form method="get" asp-action="Index">
+            <input type="hidden" name="categoryId" value="@Context.Request.Query["categoryId"]" />
+            <div class="form-group my-2">
+                <input class="form-control" name="SearchTerm" placeholder="Search" />
+            </div>
+            <div class="form-group my-2">
+                <input class="form-control" name="minPrice" placeholder="Min. Price" />
+            </div>
+            <div class="form-group my-2">
+                <input class="form-control" name="maxPrice" placeholder="Max. Price" />
+            </div>
 
-                <div class="form-group my-2">
-                    <button type="submit" name="bAction" value="filter" class="btn btn-sm btn-primary"> Filter </button>
-                    <button type="submit" name="bAction" value="clear" class="btn btn-sm btn-primary"> Clear </button>
-                </div>
-            </form>
-        </div>
+            <div class="form-group my-3 d-flex justify-content-between">
+                <button type="submit" name="bAction" value="filter" class="btn custom-filter-btn"> Filter </button>
+                <button type="submit" name="bAction" value="clear" class="btn custom-filter-btn"> Clear </button>
+            </div>
+        </form>
     </div>
+</div>

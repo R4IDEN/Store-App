@@ -18,6 +18,7 @@ namespace BigStoreApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            ViewData["Title"] = "Orders";
             var orders = _service.OrderService.Orders;
             return View(orders);
         }

@@ -61,9 +61,9 @@ namespace Services.Concretes
             return res;
         }
 
-        public Task<IdentityUser> SelectUser(string userName)
+        public async Task<IdentityUser> SelectUser(string userName)
         {
-            throw new NotImplementedException();
+            return await _userManager.FindByNameAsync(userName);
         }
 
         #region UPDATE
@@ -94,7 +94,7 @@ namespace Services.Concretes
             user.Email = userDTO.Email;
             var updateResult = await _userManager.UpdateAsync(user);
 
-            if(userDTO.Roles.Any())
+            if(userDTO.Roles.Any() && updateResult.Succeeded)
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
 

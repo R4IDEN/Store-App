@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<IdentityUser>
+﻿@model IEnumerable<IdentityUser>
 
 <div class="text-center my-5">
     <div class="display-6"> USERS </div>
@@ -11,7 +10,7 @@
     </a>
 </div>
 
-<table class ="table table-striped table-hover">
+<table class="table table-striped table-hover">
     <thead>
         <tr>
             <th>Id</th>
@@ -29,14 +28,19 @@
                 <td user-name="@item.UserName" user-role=""></td>
                 <td>
                     <div class="btn-group">
-                        <a class="btn btn btn-warning" asp-action="Update" asp-route-id="@item.UserName" style="margin-right: 5px;"> Edit </a>
-                        <a class="btn btn btn-info" asp-action="ResetPassword" asp-route-id="@item.UserName" style="margin-right: 5px;"> Reset Password </a>
+                        <a data-toggle="tooltip"
+                           data-placement="top"
+                           title="Edit"
+                           class="btn btn btn-warning" asp-action="Update" asp-route-id="@item.UserName" style="margin-right: 5px;"> <i class="fa-regular fa-pen-to-square"></i> </a>
+
+                        <a data-toggle="tooltip"
+                           data-placement="top"
+                           title="Reset Password"
+                           class="btn btn btn-info" asp-action="ResetPassword" asp-route-id="@item.UserName" style="margin-right: 5px;"> <i class="fa-solid fa-key"></i> </a>
+
                         <form method="post" asp-action="DeleteUser">
                             <input type="hidden" name="UserName" value="@item.UserName">
-                            <button type="submit" class="btn btn-danger">
-                                <i class="fade fa-solid fa-trash"></i>
-                                DELETE
-                            </button>
+                            <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete User"> <i class="fa-solid fa-trash"></i> </button>
                         </form>
                     </div>
                 </td>

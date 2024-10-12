@@ -1,8 +1,11 @@
-﻿using Entities.Dtos;
+﻿using BigStoreApp.Models;
+using Entities.Dtos;
 using Entities.Models;
+using Entities.RequestParameters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Services.Concretes;
 using Services.Contracts;
 
 namespace BigStoreApp.Areas.Admin.Controllers
@@ -28,10 +31,23 @@ namespace BigStoreApp.Areas.Admin.Controllers
                 "1");
         }
 
-        public IActionResult Index()
+        public IActionResult Index([FromQuery]ProductRequestParameters p)
         {
-            var model = _service.ProductService.GetAllProducts(false);
-            return View(model);
+            ViewData["Title"] = "Products";
+            var products = _service.ProductService.GetAllProductsWithDetails(p).ToList();
+
+            var pagination = new Pagination()
+            {
+                CurrentPage = p.PageNumber,
+                ItemsPerPage = p.PageSize,
+                TotalItem = _service.ProductService.GetAllProducts(false).Count()
+            };
+
+            return View(new ProductListViewModel()
+            {
+                Products = products,
+                Pagination = pagination
+            });
         }
 
 
@@ -56,6 +72,7 @@ namespace BigStoreApp.Areas.Admin.Controllers
 
                 productDTOInsertion.ImageURL = string.Concat("_photos/", file.FileName);
                 _service.ProductService.CreateProduct(productDTOInsertion);
+                TempData["success"] = $"{productDTOInsertion.Name} has been created at {DateTime.Now.ToShortDateString()}";
                 return RedirectToAction("Index");
             }
             return View();
@@ -69,6 +86,7 @@ namespace BigStoreApp.Areas.Admin.Controllers
 
             if(ModelState.IsValid && model != null) 
             {
+                ViewData["Title"] = model.Name;
                 ViewBag.Categories = GetCategories(model.CategoryId);
                 //string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", model.ImageURL);
                 return View(model);
@@ -91,6 +109,7 @@ namespace BigStoreApp.Areas.Admin.Controllers
 
                 productDTOUpdate.ImageURL = string.Concat("_photos/", file.FileName);
                 _service.ProductService.UpdateProduct(productDTOUpdate);
+                TempData["info"] = $"Product updated success. ({DateTime.Now.ToShortDateString()})";
                 return RedirectToAction("Index");
             }
             return View();
@@ -103,8 +122,17 @@ namespace BigStoreApp.Areas.Admin.Controllers
             if(!_service.ProductService.DeleteProduct(id))
             {
                 ViewBag.ErrorMessage = "Product not found, try again.";
+                TempData["info"] = "Product deleted successfully.";
                 return View("Index");
             }
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public IActionResult ToggleShowcase([FromForm]int id)
+        {
+            _service.ProductService.ToggleShowcase(id);
             return RedirectToAction("Index");
         }
     }

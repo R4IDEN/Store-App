@@ -11,7 +11,7 @@
 @if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 {
     <li>
-        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">ADMIN</a>
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><i class="fa fa-solid fa-settings"></i> ADMIN</a>
     </li>
 }
 
@@ -23,7 +23,7 @@
             asp-area=""
             asp-controller="Account"
             asp-route-returnUrl ="@Context.Request.PathAndQuery()"
-            asp-action="Logout"> Logout</a>
+           asp-action="Logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
     </li>
 }
 else
@@ -34,6 +34,6 @@ else
            asp-area=""
            asp-controller="Account"
            asp-route-returnUrl="@Context.Request.PathAndQuery()"
-           asp-action="Login"> Login</a>
+           asp-action="Login"><i class="fa-solid fa-left-from-bracket"></i> Login</a>
     </li>
 }

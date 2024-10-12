@@ -12,10 +12,12 @@ namespace BigStoreApp.Components
             _service = service;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(string page = "default")
         {
             var products = _service.ProductService.GetShowcaseProducts(false);
-            return View(products);
+            return page.Equals("default")
+                ? View(products)
+                : View("List", products);
         }
     }
 }

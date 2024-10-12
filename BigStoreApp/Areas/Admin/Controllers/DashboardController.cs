@@ -9,6 +9,8 @@ namespace BigStoreApp.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["Title"] = "Dashboard";
+            TempData["info"] = $"Welcome back, {DateTime.Now.ToShortDateString()}";
             return View();
         }
     }

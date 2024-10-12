@@ -30,6 +30,8 @@ namespace BigStoreApp.Infrastructure.TagHelpers
             if (!roles.Any())
                 throw new Exception("Role not found. (user/index)");
 
+            ul.InnerHtml.AppendHtml("| ");
+
             foreach (var role in roles)
             {
                 if (await _userManager.IsInRoleAsync(user, role))

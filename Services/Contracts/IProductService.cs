@@ -15,6 +15,7 @@ namespace Services.Contracts
         IEnumerable<Product> GetAllProductsWithDetails(ProductRequestParameters p);
         IEnumerable<Product> GetShowcaseProducts(bool trackChanges);
         IEnumerable<Product> GetLatestProducts(int n, bool trackChanges);
+        void ToggleShowcase(int id);
 
         Product? GetProductWithId(int id, bool trackChanges);
         ProductDTOUpdate? GetProductWithIdForUpdate(int id, bool trackChanges);

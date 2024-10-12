@@ -1,18 +1,158 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
+.custom-style {
+    text-align: left;
+}
+
+    .custom-style * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .custom-style > *:not(:last-child) {
+    }
+
+
+
+/*--------------------------------------------------------------------------------------------------------------*/
+/* Kategori menusu için*/
+.amazon-style-menu {
+    padding: 0;
+    background-color: #f3f3f3;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+    .amazon-style-menu .list-group-item {
+        border: none;
+        padding: 10px 20px;
+        background-color: #f3f3f3;
+        transition: background-color 0.3s ease;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+    }
+
+        .amazon-style-menu .list-group-item a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            width: 100%;
+        }
+
+        .amazon-style-menu .list-group-item:hover {
+            background-color: #e6e6e6;
+            cursor: pointer;
+        }
+
+        .amazon-style-menu .list-group-item a:hover {
+            color: #000;
+        }
+
+
+.categories-header {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; /* Koyu bir renk */
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd; /* Alt cizgi ekleyerek vurgulama */
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+    .categories-header i {
+        margin-right: 8px; /* ikon ile metin arasinda bosluk */
+        color: #333; /* Ikon rengi ile metin rengini ayni yap */
+    }
+
+
+/*--------------------------------------------------------------------------------------------------------------*/
+/* Filtreleme menusu icin */
+.filter-container {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölgelendirme */
+}
+
+/* BAslik ve ikon */
+.filter-title {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+    .filter-title i {
+        margin-right: 8px;
+        color: #007bff;
+    }
+
+/* Form icerigi */
+.filter-body .form-control {
+    border-radius: 5px;
+}
+
+.filter-body input::placeholder {
+    color: #6c757d;
+    opacity: 0.8;
+}
+
+/* Butonlar */
+.custom-filter-btn {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    .custom-filter-btn:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+.custom-clear-btn {
+    background-color: #f8f9fa;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+    .custom-clear-btn:hover {
+        background-color: #6c757d;
+        color: white;
+    }
+
+
+/*--------------------------------------------------------------------------------------------------------------*/

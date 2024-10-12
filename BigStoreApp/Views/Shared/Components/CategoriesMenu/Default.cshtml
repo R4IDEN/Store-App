@@ -7,13 +7,13 @@
 
 
 <div class="my-4">
-    <h6>
+    <h6 class="categories-header">
         <i class="fa-solid fa-list"> Categories</i>
     </h6>
-    <ul class="list-group">
+    <ul class="list-group amazon-style-menu">
         @foreach(var category in Model)
         {
-            <li class="list-group-item" style="border: none;">
+            <li class="list-group-item">
                 <a asp asp-action="Index" asp-route-categoryId="@category.CategoryId" style="text-decoration: none; color: inherit;"> @category.Name </a>
             </li>
         }
