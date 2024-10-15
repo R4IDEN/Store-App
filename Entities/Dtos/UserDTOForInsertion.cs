@@ -9,8 +9,8 @@ namespace Entities.Dtos
 {
     public class UserDTOForInsertion : UserDTO
     {
+        [Required(ErrorMessage = "Password is required.")]
         [DataType(DataType.Password)]
-        [Required(ErrorMessage ="Password is mandatory")]
-        public string? Password { get; init; }
+        public string? Password { get; set; }
     }
 }

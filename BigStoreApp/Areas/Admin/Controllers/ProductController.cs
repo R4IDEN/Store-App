@@ -23,7 +23,7 @@ namespace BigStoreApp.Areas.Admin.Controllers
 
         private SelectList GetCategories(int? selectedCatId)
         {
-            if(selectedCatId != 0)
+            if (selectedCatId != 0)
                 return new SelectList(_service.CategoryService.GetAllCategories(false), "CategoryId", "Name", selectedCatId);
 
             return new SelectList(_service.CategoryService.GetAllCategories(false), "CategoryId",
@@ -31,7 +31,7 @@ namespace BigStoreApp.Areas.Admin.Controllers
                 "1");
         }
 
-        public IActionResult Index([FromQuery]ProductRequestParameters p)
+        public IActionResult Index([FromQuery] ProductRequestParameters p)
         {
             ViewData["Title"] = "Products";
             var products = _service.ProductService.GetAllProductsWithDetails(p).ToList();
@@ -50,16 +50,15 @@ namespace BigStoreApp.Areas.Admin.Controllers
             });
         }
 
-
         //CREATE
-        public IActionResult CreateProduct() 
+        public IActionResult CreateProduct()
         {
             ViewBag.Categories = GetCategories(0);
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateProduct([FromForm]ProductDTOInsertion productDTOInsertion, IFormFile file) 
+        public async Task<IActionResult> CreateProduct([FromForm] ProductDTOInsertion productDTOInsertion, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -72,19 +71,20 @@ namespace BigStoreApp.Areas.Admin.Controllers
 
                 productDTOInsertion.ImageURL = string.Concat("_photos/", file.FileName);
                 _service.ProductService.CreateProduct(productDTOInsertion);
+
                 TempData["success"] = $"{productDTOInsertion.Name} has been created at {DateTime.Now.ToShortDateString()}";
+
                 return RedirectToAction("Index");
             }
             return View();
         }
 
-
         //UPDATE
-        public IActionResult UpdateProduct([FromRoute(Name ="Id")]int id)
+        public IActionResult UpdateProduct([FromRoute(Name = "Id")] int id)
         {
             var model = _service.ProductService.GetProductWithIdForUpdate(id, false);
 
-            if(ModelState.IsValid && model != null) 
+            if (ModelState.IsValid && model != null)
             {
                 ViewData["Title"] = model.Name;
                 ViewBag.Categories = GetCategories(model.CategoryId);
@@ -92,11 +92,12 @@ namespace BigStoreApp.Areas.Admin.Controllers
                 return View(model);
             }
             return View();
-            
+
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateProduct([FromForm]ProductDTOUpdate productDTOUpdate, IFormFile file) 
+        public async Task<IActionResult> UpdateProduct([FromForm] ProductDTOUpdate productDTOUpdate, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -109,28 +110,28 @@ namespace BigStoreApp.Areas.Admin.Controllers
 
                 productDTOUpdate.ImageURL = string.Concat("_photos/", file.FileName);
                 _service.ProductService.UpdateProduct(productDTOUpdate);
+
                 TempData["info"] = $"Product updated success. ({DateTime.Now.ToShortDateString()})";
                 return RedirectToAction("Index");
             }
             return View();
         }
 
-
         //DELETE
         public IActionResult DeleteProduct([FromRoute(Name = "Id")] int id)
         {
-            if(!_service.ProductService.DeleteProduct(id))
+            if (_service.ProductService.DeleteProduct(id))
             {
-                ViewBag.ErrorMessage = "Product not found, try again.";
                 TempData["info"] = "Product deleted successfully.";
-                return View("Index");
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+
+            ViewBag.ErrorMessage = "Product delete process failed, try again.\"";
+            return View("Index");
         }
 
-
         [HttpPost]
-        public IActionResult ToggleShowcase([FromForm]int id)
+        public IActionResult ToggleShowcase([FromForm] int id)
         {
             _service.ProductService.ToggleShowcase(id);
             return RedirectToAction("Index");

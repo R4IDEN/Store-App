@@ -6,23 +6,28 @@
     <div class="display-6"></div>
 </div>
 
-<form method="post" asp-action="CreateCategory">
-    <div class="text-danger" asp-validation-summary="All"></div>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="col-md-4 mt-3">
+        <form method="post" asp-action="CreateCategory">
+            <div class="text-danger" asp-validation-summary="All"></div>
 
-    <div class="form-group my-3">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" placeholder="Please fill it." />
+            <div class="form-group my-3">
+                <label class="text-center d-block fs-5 text-secondary" asp-for="Name">
+                    Name for new category
+                </label>
+                <input asp-for="Name" class="form-control" placeholder="Please fill it." />
+            </div>
+
+            <div class="form-group my-3 d-flex justify-content-center">
+                <div>
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-primary">
+                        <i class="fa fa-list"> </i> Categories
+                    </a>
+                </div>
+            </div>
+        </form>
     </div>
-    
-    <div class="form-group my-3">
-        <div>
-            <button class="btn btn-primary" type="submit">
-                <i class="fa fa-save"></i> Save
-            </button>
-            <a asp-action="Index" class="btn btn-outline-primary">
-                <i class="fa fa-list"> </i>
-                Categories
-            </a>
-        </div>
-    </div>
-</form>
+</div>

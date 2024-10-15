@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
+using System.Data;
 
 namespace BigStoreApp.Areas.Admin.Controllers
 {
@@ -40,11 +41,23 @@ namespace BigStoreApp.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromForm] UserDTOForInsertion userDTO)
         {
+            if (!ModelState.IsValid)
+                return View(userDTO); // dogrulama basarisizsa View'e don
+            
             var result = await _services.AuthService.CreateUser(userDTO);
 
-            return result.Succeeded
-                ? RedirectToAction("Index")
-                : View();
+            if (!result.Succeeded)
+            {
+                // Hatalari ModelState'e ekle
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                userDTO.Roles = new HashSet<string>(_services.AuthService.Roles.Select(r => r.Name).ToList());
+                return View(userDTO); // Hatali mesajlari gostermek icin View'e don
+            }
+
+            return RedirectToAction("Index");
         }
 
 

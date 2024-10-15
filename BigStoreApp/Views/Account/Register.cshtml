@@ -12,9 +12,18 @@
     <div class="col-md-4"> </div>
 
     <div class="col-md-4">
-        <div>
-            <div class="text-danger" asp-validation-summary="All"></div>
-        </div>
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <li>@error.ErrorMessage</li>
+                    }
+                </ul>
+            </div>
+        }
+
         <form method="post" asp-action="Register">
             <div class="form-group my-1">
                 <label asp-for="UserName"> Name </label>
@@ -23,6 +32,10 @@
             <div class="form-group my-1">
                 <label asp-for="Email"> Email </label>
                 <input asp-for="Email" class="form-control" />
+            </div>
+            <div class="form-group my-1">
+                <label asp-for="PhoneNumber"> Phone Number </label>
+                <input asp-for="PhoneNumber" class="form-control" />
             </div>
             <br />
             <div class="form-group my-1">
@@ -33,6 +46,12 @@
                 <label asp-for="ConfirmPassword"> Re-enter Password </label>
                 <input asp-for="ConfirmPassword" class="form-control" />
             </div>
+            <ul id="passwordRequirements">
+                <li> Passwords must be at least 10 characters</li>
+                <li> Passwords must have at least one non-alphanumeric character</li>
+                <li> Passwords must have at least one digit ('0'-'9')</li>
+            </ul>
+            <br />
 
             <div class="form-group my-2 d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary">

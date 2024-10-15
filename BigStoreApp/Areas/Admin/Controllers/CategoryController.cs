@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using Entities.Dtos;
+using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -35,9 +36,24 @@ namespace BigStoreApp.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _service.CategoryService.CreateCategory(category);
+                TempData["success"] = $"{category.Name} has been created at {DateTime.Now.ToShortDateString()}";
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        //DELETE
+        public IActionResult DeleteCategory([FromRoute(Name = "Id")] int id)
+        {
+            if(_service.CategoryService.DeleteCategory(id)) 
+            {
+                TempData["info"] = $"Category (id : {id}) deleted successfully.";
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.ErrorMessage = "Category delete process failed, try again.";
+            return View("Index");
+
         }
     }
 }

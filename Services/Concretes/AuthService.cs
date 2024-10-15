@@ -28,14 +28,14 @@ namespace Services.Concretes
             var user = _mapper.Map<IdentityUser>(userDTO);
             var result = await _userManager.CreateAsync(user, userDTO.Password);
 
-            if(!result.Succeeded)
-                throw new Exception("Something went wrong during Add User operation.");
-            
-            if(userDTO.Roles.Count > 0) 
+            if (!result.Succeeded)
+                return IdentityResult.Failed(result.Errors.ToArray());
+
+            if (userDTO.Roles.Count > 0) 
             {
                 var roleResult = await _userManager.AddToRolesAsync(user, userDTO.Roles);
-                if (roleResult.Succeeded)
-                    throw new Exception("Something went wrong during add roles to user.");
+                if (!roleResult.Succeeded)
+                    return IdentityResult.Failed(roleResult.Errors.ToArray());
             }
 
             return result;

@@ -24,14 +24,26 @@ namespace Services.Concretes
             _repositoryManager.Save();
         }
 
+        public bool DeleteCategory(int id)
+        {
+            var model = _repositoryManager.Category.GetCategoryById(id, false);
+            if (model != null)
+            {
+                _repositoryManager.Category.DeleteCategory(model);
+                _repositoryManager.Save();
+                return true;
+            }
+            return false;
+        }
+
         public IEnumerable<Category> GetAllCategories(bool trackChanges)
         {
             return _repositoryManager.Category.FindAll(false).ToList();
         }
 
-        public Category GetCategorybyId(int id)
+        public Category GetCategorybyId(int id, bool trackChanges)
         {
-            throw new NotImplementedException();
+            return _repositoryManager.Category.GetCategoryById(id, trackChanges);
         }
     }
 }

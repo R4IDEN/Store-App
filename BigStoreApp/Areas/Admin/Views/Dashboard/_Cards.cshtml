@@ -1,16 +1,17 @@
 ﻿
 <div class="row">
     <div class="col-md-3">
-        <div class="card bg-primary text-white" style="width: 18rem;">
+        <div class="card bg-primary text-white w-100">
             <div class="card-body text-center">
-                <h6 class="card-subtitle mb-2"> Number of </h6>
-                <h5 class="card-title"> Users  </h5>
+                <h6 class="card-subtitle mb-2">Number of</h6>
+                <h5 class="card-title">Users</h5>
                 <h3 class="text-center display-3">
                     @await Component.InvokeAsync("UserSummary")
                 </h3>
-
-                <a asp-controller="User" asp-action="Index" class="card-link text-white"> Users </a>
-                <a asp-controller="User" asp-action="Create" class="card-link text-white"> Create </a>
+                <div class="btn-group w-100">
+                    <a asp-controller="User" asp-action="Index" class="btn btn-light">Users</a>
+                    <a asp-controller="User" asp-action="Create" class="btn btn-secondary">Create</a>
+                </div>
             </div>
         </div>
     </div>
@@ -23,9 +24,10 @@
                 <h3 class="text-center display-3">
                     @await Component.InvokeAsync("ProductSummary")
                 </h3>
-
-                <a asp-controller="Product" asp-action="Index" class="card-link text-white"> Products </a>
-                <a asp-controller="Product" asp-action="CreateProduct" class="card-link text-white"> Create </a>
+                <div class="btn-group w-100">
+                    <a asp-controller="Product" asp-action="Index" class="btn btn-light">Products</a>
+                    <a asp-controller="Product" asp-action="CreateProduct" class="btn btn-secondary">Create</a>
+                </div>
             </div>
         </div>
     </div>
@@ -39,7 +41,7 @@
                     @await Component.InvokeAsync("OrderInProgress")
                 </h3>
 
-                <a asp-controller="Order" asp-action="Index" class="card-link text-white"> Orders </a>
+                <a asp-controller="Order" asp-action="Index" class="btn btn-light"> Orders </a>
             </div>
         </div>
     </div>
@@ -52,9 +54,10 @@
                 <h3 class="text-center display-3">
                     @await Component.InvokeAsync("CategorySummary")
                 </h3>
-
-                <a asp-controller="Category" asp-action="Index" class="card-link text-white"> Categories </a>
-                <a asp-controller="Category" asp-action="CreateProduct" class="card-link text-white"> Create </a>
+                <div class="btn-group w-100">
+                    <a asp-controller="Category" asp-action="Index" class="btn btn-light">Categories</a>
+                    <a asp-controller="Category" asp-action="CreateCategory" class="btn btn-secondary">Create</a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-html {
+﻿html {
     font-size: 14px;
 }
 
@@ -32,7 +32,7 @@ body {
 
 
 /*--------------------------------------------------------------------------------------------------------------*/
-/* Kategori menusu i�in*/
+/* Kategori menusu için*/
 .amazon-style-menu {
     padding: 0;
     background-color: #f3f3f3;
@@ -90,7 +90,7 @@ body {
     background-color: #f8f9fa;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Hafif g�lgelendirme */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölgelendirme */
 }
 
 /* BAslik ve ikon */
@@ -156,3 +156,41 @@ body {
 
 
 /*--------------------------------------------------------------------------------------------------------------*/
+
+/* Diger Kucuk islemler */
+
+.card-body {
+    height: 200px; /* yüksekligi kartin boyutuna gore ayarlama */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-img-top {
+    height: 150px; /* istedigim yukseklik yukseklik */
+    object-fit: cover;
+}
+
+/*Dashboard'daki gostergelerin butonlari icin*/
+
+.btn-custom {
+    background-color: #4CAF50; /* Arka plan renk degistirme */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-custom:hover {
+        background-color: #45a049; /* Hover efekt rengi */
+        text-decoration: none;
+    }
+
+
+

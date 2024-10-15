@@ -10,8 +10,9 @@ namespace Services.Contracts
     public interface ICategoryService
     {
         IEnumerable<Category> GetAllCategories(bool trackChanges);
-        Category GetCategorybyId(int id);
+        Category GetCategorybyId(int id, bool trackChanges);
 
         void CreateCategory(Category category);
+        bool DeleteCategory(int id);
     }
 }

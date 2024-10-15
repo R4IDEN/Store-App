@@ -1,4 +1,9 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function validateForm() {
+    // Form alanlarini degiskenlere ata
+    const userName = document.getElementById("UserName").value.trim();
+    const email = document.getElementById("Email").value.trim();
+    const password = document.getElementById("Password").value.trim();
 
-// Write your JavaScript code.
+    // eger tum alanlar doluysa form gonderilebilir
+    return true;
+}

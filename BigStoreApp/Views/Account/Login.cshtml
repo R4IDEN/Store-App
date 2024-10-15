@@ -1,7 +1,8 @@
 ﻿@model LoginModel
 
 <div class="text-center my-1">
-    <h6 class="display-6"> <p style="color: gray; font-weight: bold;">
+    <h6 class="display-6">
+        <p style="color: gray; font-weight: bold;">
             <i class="fa-solid fa-right-to-bracket p-3"></i> LOGIN
         </p>
     </h6>
@@ -24,7 +25,12 @@
             <br />
             <div class="form-group my-1">
                 <label asp-for="Password"> Password </label>
-                <input asp-for="Password" class="form-control" />
+                <input asp-for="Password" class="form-control" id="passwordField" type="password" />
+            </div>
+
+            <div class="form-group my-1">
+                <input type="checkbox" id="showPassword" onclick="togglePasswordVisibility()" />
+                <label for="showPassword">Show Password</label>
             </div>
 
             <div class="form-group my-2 d-flex justify-content-center">
@@ -40,5 +46,17 @@
     </div>
 
 </div>
+
+<!-- Sifre goster/gizle -->
+<script>
+    function togglePasswordVisibility() {
+        var passwordField = document.getElementById("passwordField");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
+</script>
 
 
