@@ -31,7 +31,7 @@ namespace Services.Concretes
             if (!result.Succeeded)
                 return IdentityResult.Failed(result.Errors.ToArray());
 
-            if (userDTO.Roles.Count > 0) 
+            if (userDTO.Roles.Count > 0)
             {
                 var roleResult = await _userManager.AddToRolesAsync(user, userDTO.Roles);
                 if (!roleResult.Succeeded)
@@ -44,7 +44,7 @@ namespace Services.Concretes
         public async Task<IdentityResult> DeleteUser(string userName)
         {
             var user = await _userManager.FindByNameAsync(userName);
-            if(user is null)
+            if (user is null)
                 throw new Exception("User is not found for deleting process.");
 
             return await _userManager.DeleteAsync(user);
@@ -66,6 +66,7 @@ namespace Services.Concretes
             return await _userManager.FindByNameAsync(userName);
         }
 
+
         #region UPDATE
 
         public async Task<UserDTOForUpdate> SelectUserForUpdate(string userName)
@@ -76,8 +77,8 @@ namespace Services.Concretes
 
             var userDTO = _mapper.Map<UserDTOForUpdate>(user);
 
-            userDTO.Roles = new HashSet<string>(Roles.Select(r=>r.Name).ToList());
-            userDTO.UserRoles = new HashSet<string> (await _userManager.GetRolesAsync(user));
+            userDTO.Roles = new HashSet<string>(Roles.Select(r => r.Name).ToList());
+            userDTO.UserRoles = new HashSet<string>(await _userManager.GetRolesAsync(user));
             return userDTO;
         }
 
@@ -85,7 +86,7 @@ namespace Services.Concretes
         {
             var user = await SelectUser(userDTO.UserName);
 
-            if(user is null)
+            if (user is null)
             {
                 throw new Exception("User not found");
             }
@@ -94,7 +95,7 @@ namespace Services.Concretes
             user.Email = userDTO.Email;
             var updateResult = await _userManager.UpdateAsync(user);
 
-            if(userDTO.Roles.Any() && updateResult.Succeeded)
+            if (userDTO.Roles.Any() && updateResult.Succeeded)
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
 
@@ -104,5 +105,67 @@ namespace Services.Concretes
             return;
         }
         #endregion
+
+        // Roller ve kullanıcı sayıları döndüren metod
+        public async Task<List<RoleDTO>> GetRolesWithUserCountsAsync()
+        {
+            var rolesWithCounts = new List<RoleDTO>();
+
+            // Tum rolleri al
+            var roles = _roleManager.Roles.ToList();
+
+            foreach (var role in roles)
+            {
+                // Her rol icin kullanicilari al ve say
+                var usersInRole = await _userManager.GetUsersInRoleAsync(role.Name);
+
+                // RoleDTO olustur ve listeye ekle
+                var roleDto = new RoleDTO
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name,
+                    NumberOfuser = usersInRole.Count
+                };
+
+                rolesWithCounts.Add(roleDto);
+            }
+
+            return rolesWithCounts;
+        }
+
+        // Rol ekleme islemi
+        public async Task<IdentityResult> CreateRoleAsync(string roleName)
+        {
+            if (string.IsNullOrEmpty(roleName))
+                return IdentityResult.Failed(new IdentityError { Description = "Role name must be provided." });
+
+            var role = new IdentityRole(roleName);
+            var result = await _roleManager.CreateAsync(role);
+            return result;
+        }
+
+        // Rol silme islemi
+        public async Task<IdentityResult> DeleteRoleAsync(string roleId)
+        {
+            var role = await _roleManager.FindByIdAsync(roleId);
+            if (role == null)
+                return IdentityResult.Failed(new IdentityError { Description = $"Role with ID '{roleId}' not found." });
+
+            // Role sahip kullanicilari bul
+            var usersInRole = await _userManager.GetUsersInRoleAsync(role.Name);
+            foreach (var user in usersInRole)
+            {
+                // her bir kullanicidan rolu kaldir
+                var removeResult = await _userManager.RemoveFromRoleAsync(user, role.Name);
+                if (!removeResult.Succeeded)
+                {
+                    return removeResult; // Hata varsa islemi durdur ve hata dondur
+                }
+            }
+
+            // Rolu sil
+            var deleteResult = await _roleManager.DeleteAsync(role);
+            return deleteResult;
+        }
     }
 }

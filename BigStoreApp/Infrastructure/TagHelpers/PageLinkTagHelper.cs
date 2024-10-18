@@ -19,11 +19,13 @@ namespace BigStoreApp.Infrastructure.TagHelpers
 
         [ViewContext]
         [HtmlAttributeNotBound]
+        // Html formundaki verileri bunun uzerinden gonderecegiz.
+        //Html sayfasi ile bu ifadenin eslesmemesi icin notbound ekledik
         public ViewContext? viewContext { get; set; }
         
         public Pagination pageModel { get; set; }
         public string pageAction { get; set; }
-        public bool PageClassEnabled { get; set; } = false;
+        public bool PageClassesEnabled { get; set; } = false;
         public string PageClass { get; set; } = string.Empty;
         public string PageClassNormal { get; set; } = string.Empty;
         public string PageClassSelected { get; set; } = string.Empty;
@@ -40,7 +42,7 @@ namespace BigStoreApp.Infrastructure.TagHelpers
                 {
                     TagBuilder tag = new TagBuilder("a");
                     tag.Attributes["href"] = urlHelper.Action(pageAction, new {PageNumber = i});
-                    if(PageClassEnabled)
+                    if(PageClassesEnabled)
                     {
                         tag.AddCssClass(PageClass);
                         tag.AddCssClass(i == pageModel.CurrentPage ? PageClassSelected : PageClassNormal);

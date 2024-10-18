@@ -14,5 +14,10 @@ namespace Services.Contracts
         Task Update(UserDTOForUpdate userDTO);
         Task<IdentityResult> ResetPassword(ResetPasswordDTO resetPasswordDTO);
         Task<IdentityResult> DeleteUser(string userName);
+
+        //Role Islemleri
+        Task<List<RoleDTO>> GetRolesWithUserCountsAsync();
+        Task<IdentityResult> CreateRoleAsync(string roleName);
+        Task<IdentityResult> DeleteRoleAsync(string roleId);
     }
 }
